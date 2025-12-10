@@ -235,10 +235,11 @@ class Mirror:
                 bot.send_document(
                     self.chat_id,
                     document=f,
-                    caption=f"Website cloned successfully!\n"
-                            f"Files: {self.file_count}\n"
+                    caption=f"{BOX} Cʟᴏɴᴇᴅ\n"
+                            f"Fɪʟᴇs: {self.file_count}\n"
                             f"URL: {self.url}\n"
-                            f"Offline ready!",
+                            f"{cloud_text}"
+                            f"╚═════◇◆◇═════╝",
                     # filename parameter removed — yahi error tha!
                 )
                 
