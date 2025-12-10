@@ -235,15 +235,13 @@ class Mirror:
                 bot.send_document(
                     self.chat_id,
                     document=f,
-                    filename="TeamDev.sbs.zip",
-                    caption=(
-                        f"{BOX}ᴄʟᴏɴᴇᴅ!\n"
-                        f"ғɪʟᴇs: {self.file_count}\n"
-                        f"{cloud_text}\n"
-                        "╚═════◇◆◇═════╝"
-                    )
+                    caption=f"Website cloned successfully!\n"
+                            f"Files: {self.file_count}\n"
+                            f"URL: {self.url}\n"
+                            f"Offline ready!",
+                    # filename parameter removed — yahi error tha!
                 )
-
+                
         except Exception as e:
             bot.send_message(self.chat_id, f"Error: {e}")
 
