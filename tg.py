@@ -235,7 +235,7 @@ class Mirror:
                 bot.send_document(
                     self.chat_id,
                     InputFile(f,
-                    filename="TeamDev.sbs.zip"),
+                    file_name="TeamDev.sbs.zip"),
                     caption=(
                         f"{BOX}ᴄʟᴏɴᴇᴅ!\n"
                         f"ғɪʟᴇs: {self.file_count}\n"
