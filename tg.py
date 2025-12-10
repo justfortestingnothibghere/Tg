@@ -119,14 +119,22 @@ class Mirror:
         return ''.join(random.choices(string.ascii_letters + string.digits, k=20))
 
     def mirror(self):
-        # ... [same scraping logic as before] ...
-        # After success:
-        
+        try:
+            self.update_progress("Starting mirror...\n2-15 min lag sakta hai")
+
+            self.download(self.url)
+
+            if self.cancelled:
+                self.update_progress("Cancelled by user")
+                return
+
+            self.update_progress("Zipping files...")
+            
         zip_path = f"{self.dir}.zip"
         shutil.make_archive(str(self.dir), 'zip', str(self.dir))
         
         key = self.generate_key()
-        cloud_link = f"https://teamdev.sbs/scraped/{self.user_id}_{num}?key={key}"
+        cloud_link = f"https://tg-ultimate-bot.onrender.com/scraped/{self.user_id}_{num}?key={key}"
         
         with open(f"{self.dir}/key.txt", "w") as f:
             f.write(key)
