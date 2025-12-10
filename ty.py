@@ -110,7 +110,7 @@ def send_tc_message(chat_id, user_id):
         "Made with ❤️ by @MR_ARMAN_08"
     )
 
-    photo = "https://share.google/foZB1qW1Ycsupkhbi"  # ← YAHAN APNI T&C IMAGE DAALO
+    photo = "https://graph.org/file/6bdddbc4b335597a86632-bbfc6792edbf4e2b21.jpg"  # ← YAHAN APNI T&C IMAGE DAALO
 
     bot.send_photo(
         chat_id,
@@ -160,7 +160,7 @@ def start(message):
         send_tc_message(message.chat.id, user_id)
         return
 
-    photo = "https://teamdev.sbs/logo.png"  # ← MAIN BOT IMAGE
+    photo = "https://graph.org/file/6bdddbc4b335597a86632-bbfc6792edbf4e2b21.jpg"  # ← MAIN BOT IMAGE
 
     caption = (
         "Wᴇʙsɪᴛᴇ Mɪʀʀᴏʀ Bᴏᴛ - LIVE!\n\n"
