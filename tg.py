@@ -1,6 +1,6 @@
 # tg.py - TeamDev Mirror Bot v5.0 (With Daily + Monthly Limits)
 import telebot
-import telebot.types import InputFile
+from telebot.types import InputFile
 import threading
 import os
 import shutil
