@@ -50,11 +50,11 @@ def home():
 def download_scraped(filename):
     key = request.args.get("key")
     if not key:
-        return "<h1>Access Denied</h1><p>No key provided, Go To "t.me/Mirror_x_TeamDev_Robot</p>", 403
+        return "<h1>Access Denied</h1><p>No key provided, Go To t.me/Mirror_x_TeamDev_Robot</p>", 403
     
     file_path = os.path.join("scraped", filename)
     if not os.path.exists(file_path):
-        return "<h1>404</h1><p>File not found, Go To "t.me/Mirror_x_TeamDev_Robot</p>", 404
+        return "<h1>404</h1><p>File not found, Go To t.me/Mirror_x_TeamDev_Robot</p>", 404
     
     # Simple key check (in real use database)
     key_file = file_path.replace(".zip", "") + "/key.txt"
@@ -62,7 +62,7 @@ def download_scraped(filename):
         with open(key_file, "r") as f:
             real_key = f.read().strip()
         if key != real_key:
-            return "<h1>Invalid Key, Go To "t.me/Mirror_x_TeamDev_Robot</h1>", 403
+            return "<h1>Invalid Key, Go To t.me/Mirror_x_TeamDev_Robot</h1>", 403
     
     return send_from_directory("scraped", filename, as_attachment=True)
 
